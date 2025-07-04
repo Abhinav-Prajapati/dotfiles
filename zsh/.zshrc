@@ -9,9 +9,6 @@ plugins=(
   git                     # Git integration and shortcuts
   zsh-autosuggestions     # Command suggestions based on history
   zsh-syntax-highlighting # Syntax highlighting for commands
-  fzf-tab                 # Tab completion with fzf
-  zsh-you-should-use      # Reminds you of aliases you've set
-  fzf-zsh-plugin          # Fuzzy finder integration
 )
 
 # Source Oh My Zsh
@@ -46,7 +43,7 @@ alias gco='git checkout'                 # Checkout branch or files
 alias v='nvim'                           # Open Neovim
 
 # Tmux aliases
-alias t='tmux'                           # Tmux shorthand
+alias t='tmux -u'                           # Tmux shorthand
 alias tsource='tmux source-file ~/.tmux.conf' # Reload tmux configuration
 
 # Initialize zoxide (smart directory jumper) with 'cd' command replacement
@@ -54,5 +51,15 @@ eval "$(zoxide init zsh --cmd cd)"
 
 # Auto-start tmux if not already in tmux and not in VS Code
 if [[ -z "$TMUX" && "$TERM_PROGRAM" != "vscode" ]]; then
-    tmux new-session -A -s default       # Create or attach to 'default' session
+    t new-session -A -s default       # Create or attach to 'default' session
 fi
+source ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+export NVM_DIR="$HOME/.nvm"
+source "$NVM_DIR/nvm.sh"
+export TERM="xterm-256color"
